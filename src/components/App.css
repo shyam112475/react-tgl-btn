@@ -1,71 +1,153 @@
 
-:root{
-    margin-top: 80px;
-    font-family: Arial, sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-.form-container{
-    background: #f7fff7;
-    color: #023047;
-    padding: 30px;
-    margin:auto;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    font-family: Arial, sans-serif;
-    font-family: Arial, sans-serif;
-}
-.form-container h1{
-    display:flex;
-    justify-content: center;
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #2b2d42;
-    font-family: Arial, sans-serif;
-}
-#form-btn{
-    display: flex;
+
+
+body {
+  
+  display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #8d99ae;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  transition: all 0.3s ease;
-  font-family: Arial, sans-serif;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  color: #ffffff;
 }
-.btn-container{
-    background: #f8f9fa;
-    color: #023047;
-    padding: 30px;
-   margin:auto;
+
+
+.form-container {
+    background: linear-gradient(135deg, #0b8399, #0cbdd4);
+  padding: 30px;
+  height: 500px;
+  width: 380px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.37);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 32px 32px rgba(0, 0, 0, 0.5);
+}
+.btn-container:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 32px 32px rgba(0, 0, 0, 0.5);
+}
+
+
+.form-container h1 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bolder;
+}
+
+
+.input input {
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 16px;
+  color: #fff;
+  outline: none;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input input::placeholder {
+  color: #fff;
+}
+
+.input input:focus {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+ 
+#toggle-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-transform: capitalize;
+  font-weight: bolder;
+  font-size: 14px;
+  color: #B0B0B0;
+  margin-bottom: 20px;
+  padding: 5px;
+  gap: 10px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+#toggle-container:hover {
+  color: #fff;
+}
+
+
+#form-btn {
+  background: linear-gradient(90deg,#376996,#1f487e);
+  border: none;
+  margin-top: 20px;
+  border-radius: 10px;
+  color: #fff;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(72, 239, 128, 0.2);
+}
+
+#form-btn:hover {
+  background: linear-gradient(90deg, #1f487e, #1f487e);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(72, 239, 128, 0.4);
+}
+#btn:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(72, 239, 128, 0.4);
+}
+.logo{
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
-   border-bottom-right-radius: 8px;
-   border-bottom-left-radius: 8px;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.6s ease;
-    max-width: 400px;
-    font-family: Arial, sans-serif;
 }
-#btn{
-    font-family: Arial, sans-serif;
-    justify-content: center;
-    align-items: "center";
-    color: white;
-    padding: 20px 40px;
-    width:210px;
-    display: flex;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.6s ease;
-    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+
+
+@media (max-width: 480px) {
+  .form-container {
+    width: 90%;
+    padding: 20px;
+  }
+
+  .form-container h1 {
+    font-size: 24px;
+  }
+
+  .input input {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  #form-btn {
+    font-size: 14px;
+    height: 45px;
+  }
 }

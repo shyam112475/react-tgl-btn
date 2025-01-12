@@ -6,7 +6,8 @@ function App() {
   return (
     <>
     <Form/>
-    <Toggler/>
+   <Toggler/>
+ 
     </>
   )
 }7
