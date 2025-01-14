@@ -36,9 +36,7 @@ const Form = ()=>{
             placeholder="PASSWORD"
             required
           />
-
         </div>
-
         <div id="toggle-container" style={{
            display:'flex',
            alignItems:'center',
@@ -47,7 +45,7 @@ const Form = ()=>{
         }}>
             <input type="checkbox" onChange={changeChek}  id="toggle-password" name="password"   required style={{
               marginLeft:'0px'    
-            }} />{check?'SHOW PASSWORD':'HIDE PASSWORD'}
+            }} />{check?'SHOW PASSWORD' :'HIDE PASSWORD'}
         </div>
         <button
          id="form-btn"
