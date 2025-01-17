@@ -1,162 +1,143 @@
-import { useState } from "react"
+import { useState } from "react";
+
 function Todo() {
-  const [isEditing, setIsEditing] = useState(null);             
-  const [currentTask, setCurrentTask] = useState("");  
-  const [inputText,setInputText] = useState('')
-  const [listDoto,setListTodo] = useState([])
-  let add = () => {
-    setListTodo([...listDoto,inputText])
-    setInputText("")
-  }
-  const removeTask = (indexToRemove) => {
-    const updatedTasks = [...listDoto]
-    updatedTasks.splice(indexToRemove,1)
-    setListTodo(updatedTasks);
+  const [inputText, setInputText] = useState("");
+  const [list, setList] = useState([]);
+  const [editIndex, setEditIndex] = useState(null);
+
+  const timeAnddate = () => {
+    const date = new Date();
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+    const seconds = date.getSeconds()
+    const day = date.getDay()
+    const month = date.getMonth()
+    const year = date.getFullYear();
+    return `${hours}:${minutes}:${seconds} on ${day}/${month}/${year}`;
   };
 
-  
-    const saveTask = (index) => {
-    const updatedTasks = listDoto.map((task, i) => (i === index ? currentTask : task));
-    setListTodo(updatedTasks);
-    setIsEditing(null); 
-    setCurrentTask(""); 
+  const handleAddTask = () => {
+    if (inputText.trim()) {
+      const newTask = {
+        text: inputText,
+        createdAt: timeAnddate(),
+      };
+      setList([...list, newTask]);
+      setInputText("");
+    }
   };
-  
+
+  const handleDeleteTask = (index) => {
+    setList(list.filter((_, i) => i !== index));
+  };
+
+  const handleEditTask = (index) => {
+    setEditIndex(index);
+    setInputText(list[index].text);
+  };
+
+  const handleSaveTask = () => {
+    const updatedList = [...list];
+    updatedList[editIndex].text = inputText;
+    setList(updatedList);
+    setEditIndex(null);
+    setInputText("");
+  };
+
   return (
-    <div>
-      <div className="mai-container" style={{
-        height:'auto',
-        width:'800px',
-        background:'#dda15e',
-        marginLeft:'25%',
-        marginTop:'30px',
-        borderRadius:'12px'
-      }}>
-        <h1 style={{marginLeft:'40%',
-          paddingTop:'30px',
-          color:'#fff'
-        }}>To_D0 List</h1>
-        <div className="center-container">
-          <div className="todo-Input">
-              <input onChange={(e)=>{
-                setInputText(e.target.value)
-              }} placeholder="Enter task here...." type="text"  className="input-box" value={inputText}/>
-             <button className="todo-btn" onClick={add} >Add Task</button>
-          </div>
-          <div className="doto-list" >
-            <ul>
-            {listDoto.map((task, index) => (
-          <li style={{
-            fontWeight: 'bold',
-            fontSize: '18px', 
-            margin: '8px 0', 
-            padding: '6px 7px',
-          
-            borderRadius: '8px',
-            color: '#264653', 
-            cursor: 'pointer',
-            transition: 'background-color 0.3s ease',
-           }}
+    <div style={{ maxWidth: "600px", margin: "30px auto", textAlign: "center" }}>
+      <h1 style={{
+        color:"#00a5cf",
+      }}>Todo List</h1>
+      <div>
+        <input
+          type="text"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+          placeholder="Enter a task"
+          style={{
+            fontSize:"large",
+            padding: "8px",
+            height:'30px',
+            width: "70%",
+            borderTopLeftRadius:'8px',
+            borderTopRightRadius:'0',
+            borderBottomLeftRadius:'8px',
+            borderBottomRightRadius:'0',
+            color:'#001219',
+            border: "1px solid #ccc",
+          }}
+        />
+        <button
+          onClick={editIndex !== null ? handleSaveTask : handleAddTask}
+          style={{
+            padding:'16px',
+            border: "none",
+            borderTopRightRadius:'12px',
+            borderBottomRightRadius:'12px',
+            marginLeft:'4px',
+            backgroundColor: "#007bff",
+            color: "white",
+          }}
+        >
+          {editIndex !== null ? "Save" : "Add"}
+        </button>
+      </div>
+      <ul style={{ listStyle: "none", padding: 0, marginTop: "20px" }}>
+        {list.map((task, index) => (
+          <li
             key={index}
+            style={{
+              padding: "10px",
+              margin: "10px 0",
+              borderRadius: "8px",
+              backgroundColor: "#e5e5e5",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              fontSize:'large',
+              overflow:'scroll',
+              gap: "10px",
+            }}
           >
-            {isEditing === index ? (
-              <input
-               className="todo-input"
-                type="text"
-                value={currentTask}
-                onChange={(e) => setCurrentTask(e.target.value)}
-                style={{ 
-                  flex: "1",
-                  marginRight: "10px",
-                  border: 'none',
-                  width: '100%', 
-                  padding: '12px 15px',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                  fontSize: '16px', 
-                  backgroundColor: '#f4f4f4', 
-                  color: '#333', 
-                  outline: 'none',            
-                  transition: 'all 0.3s ease', 
-                 }}
-              />
-           
-            ) : (
-              <span>{task}</span>
-            )}
-
-           
-            {isEditing === index ? (
+            <span>
+              <strong>Task:</strong> {task.text}
+            </span>
+            <span style={{ fontSize: "12px", color: "#666" }}>
+              <strong>Created At:</strong> {task.createdAt}
+            </span>
+            <div style={{ alignSelf: "flex-end" }}>
               <button
-                onClick={() => saveTask(index)}
+                onClick={() => handleEditTask(index)}
                 style={{
-                  fontWeight: 'bold',
-                  fontSize: '16px', 
-                  padding: '8px 15px',
-                  margin: '5px',
-                  top: '0px',
-                  border: 'none',
-                  color: 'white', 
-                  backgroundColor: '#007bff',
-                  borderRadius: '12px', 
-                  boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                  cursor: 'pointer', 
-                  transition: 'all 0.3s ease',
+                  marginRight: "10px",
+                  padding: "5px 10px",
+                  borderRadius: "8px",
+                  border: "none",
+                  backgroundColor: "#38b000",
+                  color: "white",
                 }}
               >
-                Save
+                Edit
               </button>
-            ) : (
-              <>
-                <button
-                  onClick={() => {
-                    setIsEditing(index);
-                    setCurrentTask(task);         
-                  }}
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: '16px',           
-                    margin: '8px', 
-                    padding: '8px 20px',   
-                    border: 'none',
-                    color: 'white',            
-                    backgroundColor: '#28a745', 
-                    borderRadius: '12px',         
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-                    cursor: 'pointer', 
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  Edit
-                </button>
-              
-              </>
-            )}
-          <button style={{
-            fontWeight: 'bold',
-            fontSize: '16px', 
-            margin: '8px',
-            padding: '8px 20px', 
-            border: 'none',
-            color: 'white',
-            backgroundColor: '#780000',
-            borderRadius: '12px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', 
-            cursor: 'pointer', 
-            transition: 'all 0.3s ease', 
-          
-          }}  onClick={()=>removeTask(index) }>Delete</button>
-         
+              <button
+                onClick={() => handleDeleteTask(index)}
+                style={{
+                  padding: "5px 10px",
+                  borderRadius: "8px",
+                  border: "none",
+                  backgroundColor: "#dc3545",
+                  color: "white",
+                }}
+              >
+                Delete
+              </button>
+            </div>
           </li>
-
         ))}
-            </ul>
-            
-          </div>
-        </div>
-      </div>
+      </ul>
     </div>
-  )
+  );
 }
 
-export default Todo
+export default Todo;

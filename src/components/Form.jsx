@@ -1,19 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import {useNavigate } from 'react-router-dom';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import Fingerprint from '@mui/icons-material/Fingerprint';
 const Form = ()=>{
+  const navigate = useNavigate();
       const [name,setName] = useState("");
       const [password,setPassword] = useState("");
       const [check,setChek] = useState(true)
       function changeChek(){
          setChek(!check)
       }
+      useEffect(()=>{
+        return()=>{
+          console.log("unmount...")
+        }
+
+      },[])
       return(
         <div
         className="form-container">
         <form   onSubmit={(e) =>{
             e.preventDefault()
             alert(`${name} loged in`)
-            const login = []
-            login.push({name:name,password:password})
+          navigate('/user', { state:  {name:name,password:password} });
           }}>
         <h1>
          LogIn 
@@ -28,14 +38,14 @@ const Form = ()=>{
            
           />
         </div>
-        <div className="input" style={{ display: "flex", marginBottom: "15px",flexDirection: "column" }}>
+        <div className="input" style={{ display: "flex", marginBottom: "0px",flexDirection: "column" }}>
           <input
             type={check?'password':'text'}
             value={password}
             onChange={(pass) => setPassword(pass.target.value)}
             placeholder="PASSWORD"
             required
-          />
+            />
         </div>
         <div id="toggle-container" style={{
            display:'flex',
@@ -43,15 +53,18 @@ const Form = ()=>{
            marginBottom:'15px',
            color:'#264653', 
         }}>
-            <input type="checkbox" onChange={changeChek}  id="toggle-password" name="password"   required style={{
-              marginLeft:'0px'    
-            }} />{check?'SHOW PASSWORD' :'HIDE PASSWORD'}
+           <div style={{
+            marginRight:'30px',
+            border:'none',
+            cursor:'pointer',
+            
+           }} onClick={changeChek}>{check?<Visibility/> :<VisibilityOff/>}</div>
         </div>
         <button
          id="form-btn"
          type="submit"
         >
-          Submit
+        <Fingerprint/>
         </button>
         </form>
         <div className="logo">
@@ -67,8 +80,6 @@ const Form = ()=>{
             <path d="M22.675 0h-21.35C.59 0 0 .589 0 1.317v21.367C0 23.408.589 24 1.317 24h11.496v-9.293H9.614v-3.622h3.199V8.413c0-3.183 1.926-4.917 4.738-4.917 1.348 0 2.505.101 2.842.146v3.29h-1.95c-1.527 0-1.822.726-1.822 1.791v2.349h3.645l-.475 3.622h-3.17V24h6.223c.729 0 1.317-.592 1.317-1.317V1.317C24 .589 23.408 0 22.675 0z" />
           </svg>
         </a>
-
-        {/* Google Icon */}
         <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
           <svg
             xmlns="http://www.w3.org/2000/svg"

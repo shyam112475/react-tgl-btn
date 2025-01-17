@@ -6,6 +6,9 @@ import './App.css'
 import Form from './components/Form';
 import Footer from './components/Footer'
 import Todo from './components/Todo';
+import Toggle from './components/Togglebtn';
+import User from './components/User';
+
 
 function App() {
   return (
@@ -16,6 +19,8 @@ function App() {
         <Route path='/dashboard' element={<Dashboard/>} />
         <Route path='/login' element={<Form/>}/>
         <Route path='/todo' element={<Todo/>}/>
+         <Route path='/toggle' element={<Toggle/>}/>
+         <Route path='/user' element={<User/>}/>
       </Routes>
       <Footer/>
     </Router>

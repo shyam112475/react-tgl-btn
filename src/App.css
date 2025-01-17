@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  background: #f4f4f5;
   padding: 15px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
@@ -22,9 +22,10 @@
 
 .navbar ul li a {
   text-decoration: none;
+ 
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color:#003566;
   position: relative;
   transition: all 0.3s ease;
 }
@@ -34,7 +35,7 @@
   position: absolute;
   width: 0;
   height: 2px;
-  background-color: white;
+  background-color:blue;
   left: 0;
   bottom: -5px;
   transition: width 0.3s ease;
@@ -63,7 +64,7 @@
 /* Stylish CSS for Footer */
 
 .footer {
-  background: linear-gradient(90deg, #15616d, #003049);
+  background:#3f37c9;
   color: white;
   text-align: center;
   padding: 20px 0;
@@ -72,7 +73,7 @@
   position: fixed;
   width: 100%;
   bottom: 0;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 10 4px 10px 4px rgba(0, 0, 0, 0.2);
 }
 
 .footer h1 {
@@ -89,8 +90,8 @@
     padding: 30px;
     height: 400px;
     width: 340px;
-    margin-left: 35%;
-    margin-top: 100px;
+    margin-left: 36%;
+    margin-top: 70px;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     backdrop-filter: blur(10px);
